@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,5 +32,18 @@ public class UserService implements UserDetailsService {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
-    // TODO CRUD Method
+    public List<User> findAll() {
+        List<User> list = new ArrayList<>();
+        userRepository.findAll().iterator().forEachRemaining(list::add);
+
+        return list;
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public void remove(Long id) {
+        userRepository.deleteById(id);
+    }
 }
