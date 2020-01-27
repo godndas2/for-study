@@ -1,5 +1,8 @@
 package com.forstudy.querydsl.entity.academy;
 
+import com.forstudy.querydsl.dto.StudentCount;
+import com.forstudy.querydsl.entity.student.Student;
+
 import java.util.List;
 
 /**
@@ -9,4 +12,6 @@ import java.util.List;
 */
 public interface AcademyRepositoryCustom {
     List<Academy> findByName(String name);
+    List<StudentCount> findAllStudentCount();
+    List<Academy> findAllByStudentId(long studentId);
 }

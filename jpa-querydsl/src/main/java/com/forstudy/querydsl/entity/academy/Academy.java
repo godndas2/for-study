@@ -1,14 +1,15 @@
 package com.forstudy.querydsl.entity.academy;
 
+import com.forstudy.querydsl.entity.student.Student;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +29,22 @@ public class Academy {
         this.name = name;
         this.address = address;
     }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "academy")
+    private List<Student> students = new ArrayList<>();
+
+    public void addStudent(List<Student> students) {
+        for (Student student : students) {
+            addStudent(student);
+        }
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
+        student.setAcademy(this);
+    }
+
+
 
 
 }
