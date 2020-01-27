@@ -11,7 +11,12 @@ import java.util.List;
 * The most important part of the class name that corresponds to the fragment interface is the Impl postfix.
 */
 public interface AcademyRepositoryCustom {
+
+    // SubQuery
     List<Academy> findByName(String name);
     List<StudentCount> findAllStudentCount();
     List<Academy> findAllByStudentId(long studentId);
+
+    // DynamicQuery
+    List<Academy> findDynamicQuery(String name, String address, String phoneNumber);
 }

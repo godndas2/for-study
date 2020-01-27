@@ -32,7 +32,7 @@ public class BasicTest {
     public void queryDsl_Basic_Test() {
         String name = "halfdev";
         String email = "halfdev@test.mail";
-        academyRepository.save(new Academy(name,email));
+        academyRepository.save(new Academy(name,email,""));
 
         List<Academy> findByName = academyRepository.findByName(name);
 

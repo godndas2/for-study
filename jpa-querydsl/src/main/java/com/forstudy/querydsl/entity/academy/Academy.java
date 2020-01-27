@@ -25,9 +25,10 @@ public class Academy {
     private String phoneNumber;
 
     @Builder
-    public Academy(String name, String address) {
+    public Academy(String name, String address, String phoneNumber) {
         this.name = name;
         this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "academy")
