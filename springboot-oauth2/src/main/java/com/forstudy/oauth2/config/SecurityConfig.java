@@ -71,10 +71,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
-    }
 
     @Autowired
     public TokenStoreUserApprovalHandler userApprovalHandler(TokenStore tokenStore) {
