@@ -2,11 +2,16 @@ package com.forstudy.efjava.ch03.item11;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
 * @author halfdev
 * @since 2020-02-04
 * equals 를 재정의하려거든 hashCode 도 재정의하라
+ *  equals 에서 사용된 필드는 hashCode 를 생성할 때 반드시 사용해야 한다.
+ * hashCode 를 재정의 하지 않으면 아래와 같은 버그가 발생한다.
+ * 해당 객체를 생성해서 HashMap 컬렉션에 우선 저장한다.
+ * 이전에 저장한 객체와 동일하게 객체를 생성해서 HashMap 에서 get 메서드를 호출하면 null 값이 반환된다.
 */
 public class PhoneNumber {
 
@@ -35,14 +40,20 @@ public class PhoneNumber {
                 && pn.areaCode == areaCode;
     }
 
-    // 자주 쓰이는 hashcode, hashCode() 를 주석하면 아래 Main 의 51 라인은 null 발생
-    @Override
-    public int hashCode() {
-        int result = Short.hashCode(areaCode);
-        result = 31 * result + Short.hashCode(prefix);
-        result = 31 * result + Short.hashCode(lineNum);
-        return result;
-    }
+    // 자주 쓰이는 hashcode 재정의 방법. hashCode() 를 주석하면 아래 Main 의 51 라인은 null 발생
+//    @Override
+//    public int hashCode() {
+//        int result = Short.hashCode(areaCode);
+//        result = 31 * result + Short.hashCode(prefix);
+//        result = 31 * result + Short.hashCode(lineNum);
+//        return result;
+//    }
+
+    // 방법 2
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(areaCode,prefix,lineNum);
+//    }
 
     public static void main(String[] args) {
         Map<PhoneNumber, String> m = new HashMap<>();
