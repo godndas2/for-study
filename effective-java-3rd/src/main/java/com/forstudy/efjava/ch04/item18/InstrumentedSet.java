@@ -29,7 +29,7 @@ public class InstrumentedSet<E> extends ForwardingSet<E> {
 
     public static void main(String[] args) {
         InstrumentedSet<String> s = new InstrumentedSet<>(new HashSet<>());
-        s.addAll(List.of("틱", "탁탁", "펑"));
+//        s.addAll(List.of("틱", "탁탁", "펑")); jdk 9
         System.out.println(s.getAddCount());
     }
 }
