@@ -1,9 +1,12 @@
 package com.forstudy.oauth2.web;
 
+import com.forstudy.oauth2.model.User;
+import com.forstudy.oauth2.model.VerificationToken;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -44,5 +49,23 @@ public class RegistrationControllerTest {
     @Test@Ignore
     public void postFormGet() {
 
+    }
+
+    // TODO
+    @Test@Ignore
+    public void getVerifyEmail() throws Exception {
+        final String code = UUID.randomUUID().toString();
+        final VerificationToken token = createToken();
+
+
+        mockMvc.perform(get("/verify-email")
+                .param("code", code))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    // TODO
+    private VerificationToken createToken() {
+        return null;
     }
 }
