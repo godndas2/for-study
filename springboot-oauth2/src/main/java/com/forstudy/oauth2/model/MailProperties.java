@@ -1,9 +1,11 @@
 package com.forstudy.oauth2.model;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Component
+@Configuration
 @ConfigurationProperties(prefix = "mail")
 public class MailProperties {
     public static class SMTP {

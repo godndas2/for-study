@@ -5,19 +5,21 @@ import com.forstudy.oauth2.model.VerificationToken;
 import com.forstudy.oauth2.repository.UserRepository;
 import com.forstudy.oauth2.repository.VerificationTokenRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class VerificationTokenService {
 
-    private UserRepository userRepository;
-    private VerificationTokenRepository verificationTokenRepository;
-    private MailService sendingMailService;
+    private final UserRepository userRepository;
+    private final VerificationTokenRepository verificationTokenRepository;
+    private final MailService sendingMailService;
 
     public void createVerification(String email){
         List<User> users = userRepository.findByEmail(email);
