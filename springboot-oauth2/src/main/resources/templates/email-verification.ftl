@@ -1,9 +1,0 @@
-Hi,<br/>
-
-XXXXXXXXXXX.<br/>
-
-${VERIFICATION_URL}<br/>
-
-XXXXXXXXXXX.<br/>
-
-XXXXXXXXXXX team,
