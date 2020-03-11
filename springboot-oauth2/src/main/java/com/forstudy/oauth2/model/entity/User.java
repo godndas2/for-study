@@ -1,6 +1,5 @@
 package com.forstudy.oauth2.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,14 +7,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -32,9 +29,21 @@ public class User {
     @NotEmpty
     private String password;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") },
-               inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    private Set<Role> roles = new HashSet<Role>();
+    @Enumerated(EnumType.STRING)
+    private Roles roles;
+
+    public User(User user) {
+        super();
+        this.id = user.getId();
+        this.name = user.getName();
+        this.login = user.getLogin();
+        this.password = user.getPassword();
+        this.roles = user.getRoles();
+    }
+
+//    @JsonIgnore
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") },
+//               inverseJoinColumns = { @JoinColumn(name = "role_id") })
+//    private Set<Role> roles = new HashSet<Role>();
 }
