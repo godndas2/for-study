@@ -51,12 +51,19 @@
         </dependency>
 
         <dependency>
-            <groupId>com.querydsl</groupId>
+            <groupId>com.querydsl
+            </groupId>
             <artifactId>querydsl-apt</artifactId>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -79,6 +86,11 @@
                         <configuration>
                             <outputDirectory>target/generated-sources/java</outputDirectory>
                             <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                            <options>
+                                <querydsl.entityAccessors>true</querydsl.entityAccessors>
+                                <querydsl.createDefaultVariable>true</querydsl.createDefaultVariable>
+                                <querydsl.packageSuffix>.qdsl</querydsl.packageSuffix>
+                            </options>
                         </configuration>
                     </execution>
                 </executions>
