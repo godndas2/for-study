@@ -16,7 +16,7 @@ public class UserResource {
     private final UserService userService;
 
     @GetMapping("/instructors/{username}/users")
-    public List<User> getAllUsers(@PathVariable String username) {
+    public List<User> getAllUsers(@PathVariable("username") String username) {
         return userService.findAll();
     }
 
