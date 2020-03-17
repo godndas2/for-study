@@ -2,15 +2,11 @@ package org.bootvue.jwt.auth;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -34,7 +30,7 @@ public class JwtTokenAuthorizationFilter extends OncePerRequestFilter { // OnceP
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
+    @Autowired // construct inject Error Resolve
     private UserDetailsService userDetailsService;
     private final JwtTokenUtil jwtTokenUtil;
 
@@ -86,20 +82,12 @@ public class JwtTokenAuthorizationFilter extends OncePerRequestFilter { // OnceP
     public UserDetailsService userDetailsService() {
 
         //User Role
-        UserDetails theUser = User.withUsername("sergey")
+        UserDetails theUser = User.withUsername("test")
                 .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
-                .password("12345678").roles("USER").build();
-
-        //Manager Role
-        UserDetails theManager = User.withUsername("john")
-                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
-                .password("87654321").roles("MANAGER").build();
-
+                .password("1234").roles("USER").build();
 
         InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-
         userDetailsManager.createUser(theUser);
-        userDetailsManager.createUser(theManager);
 
         return userDetailsManager;
     }

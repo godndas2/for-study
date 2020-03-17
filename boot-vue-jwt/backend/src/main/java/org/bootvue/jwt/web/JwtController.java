@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.bootvue.jwt.auth.JwtTokenRequest;
 import org.bootvue.jwt.auth.JwtTokenResponse;
 import org.bootvue.jwt.auth.JwtTokenUtil;
+import org.bootvue.jwt.auth.JwtUserDetails;
 import org.bootvue.jwt.exception.AuthenticationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @RestController
@@ -26,9 +29,12 @@ public class JwtController {
     @Value("${jwt.http.request.header}")
     private String tokenHeader;
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenUtil jwtTokenUtil;
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @PostMapping(value = "${jwt.get.token.uri}")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtTokenRequest tokenRequest) throws AuthenticationException {
@@ -39,6 +45,21 @@ public class JwtController {
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtTokenResponse(token));
+    }
+
+    @GetMapping(value = "${jwt.refresh.token.uri}")
+    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
+        String authToken = request.getHeader(tokenHeader);
+        final String token = authToken.substring(7);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        JwtUserDetails user = (JwtUserDetails) userDetailsService.loadUserByUsername(username);
+
+        if (jwtTokenUtil.canTokenBeRefreshed(token)) {
+            String refreshedToken = jwtTokenUtil.refreshToken(token);
+            return ResponseEntity.ok(new JwtTokenResponse(refreshedToken));
+        } else {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     ////////////////////////////////////////////// NON API ///////////////////////////////////////////////////////
