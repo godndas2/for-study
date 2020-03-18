@@ -26,8 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtUnAuthorizedEntryPoint jwtUnAuthorizedEntryPoint;
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
     private final JwtTokenAuthorizationFilter jwtTokenAuthorizationFilter;
 
     @Value("${jwt.get.token.uri}")
@@ -58,6 +57,7 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/*", "/").permitAll() // TEST
                 .anyRequest().authenticated();
 
         httpSecurity

@@ -30,8 +30,7 @@ public class JwtTokenAuthorizationFilter extends OncePerRequestFilter { // OnceP
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired // construct inject Error Resolve
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
     private final JwtTokenUtil jwtTokenUtil;
 
     @Value("${jwt.http.request.header}")
