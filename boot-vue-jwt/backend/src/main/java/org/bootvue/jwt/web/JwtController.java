@@ -31,8 +31,7 @@ public class JwtController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @PostMapping(value = "${jwt.get.token.uri}")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtTokenRequest tokenRequest) throws AuthenticationException {
