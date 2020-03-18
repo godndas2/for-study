@@ -29,10 +29,8 @@ public class JwtController {
     @Value("${jwt.http.request.header}")
     private String tokenHeader;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserDetailsService userDetailsService;
 

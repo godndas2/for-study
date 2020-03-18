@@ -13,11 +13,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserResource {
 
-    private final UserService userService;
+    private final HardCordService hardCordService;
 
     @GetMapping("/instructors/{username}/users")
     public List<User> getAllUsers(@PathVariable("username") String username) {
-        return userService.findAll();
+        return hardCordService.findAll();
     }
 
 }

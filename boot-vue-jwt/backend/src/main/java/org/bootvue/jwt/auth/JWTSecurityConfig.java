@@ -26,7 +26,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtUnAuthorizedEntryPoint jwtUnAuthorizedEntryPoint;
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
     private final JwtTokenAuthorizationFilter jwtTokenAuthorizationFilter;
 
     @Value("${jwt.get.token.uri}")

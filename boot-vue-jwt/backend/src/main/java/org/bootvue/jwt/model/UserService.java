@@ -1,24 +1,35 @@
 package org.bootvue.jwt.model;
 
+import org.bootvue.jwt.auth.JwtUserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
-    private static List<User> users = new ArrayList<>();
-    private static long idCounter = 0;
+    static List<JwtUserDetails> inMemoryUsers = new ArrayList<>();
 
     static {
-        users.add(new User(++idCounter, "halfdev", "Spring Boot and Angular"));
-        users.add(new User(++idCounter, "halfdev", "Spring Boot and React"));
-        users.add(new User(++idCounter, "halfdev", "Spring Boot and Spring Cloud"));
-        users.add(new User(++idCounter, "halfdev", "Spring Boot and AI"));
+        inMemoryUsers.add(new JwtUserDetails(1L,
+                "bootvue",
+                "1234",
+                "ROLE_USER"));
     }
 
-    public List<User> findAll() {
-        return users;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<JwtUserDetails> findFirst = inMemoryUsers.stream()
+                .filter(user -> user.getUsername().equals(username))
+                .findFirst();
+        if (!findFirst.isPresent()) {
+            throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
+        }
+        return findFirst.get();
     }
 }

@@ -78,17 +78,4 @@ public class JwtTokenAuthorizationFilter extends OncePerRequestFilter { // OnceP
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-
-        //User Role
-        UserDetails theUser = User.withUsername("test")
-                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
-                .password("1234").roles("USER").build();
-
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        userDetailsManager.createUser(theUser);
-
-        return userDetailsManager;
-    }
 }
