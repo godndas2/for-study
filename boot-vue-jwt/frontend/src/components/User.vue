@@ -20,3 +20,32 @@
     </div>
   </section>
 </template>
+<script>
+import Menu from "./Menu";
+import CourseDataService from "../service/UserDataService";
+
+export default {
+  name: "User",
+  components: {
+    Menu
+  },
+  data() {
+    return {
+      courses: [],
+      message: null,
+      INSTRUCTOR: "bootvue"
+    };
+  },
+  methods: {
+    refreshCourses() {
+      CourseDataService.retrieveAllCourses(this.INSTRUCTOR) // HardCoding
+        .then(response => {
+          this.courses = response.data;
+        });
+    }
+  },
+  created() {
+    this.refreshCourses();
+  }
+};
+</script>
