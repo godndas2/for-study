@@ -43,6 +43,8 @@
 </template>
 
 <script type="text/javascript">
+import axios from 'axios'
+
   export default {
     props: ['todo'],
     data() {
