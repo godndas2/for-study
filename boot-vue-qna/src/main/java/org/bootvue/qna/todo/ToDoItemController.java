@@ -33,4 +33,28 @@ public class ToDoItemController {
         }
         return ToDoItemAdapter.toToDoItemResponse(todoItem, errors);
     }
+
+    @GetMapping(value = "{id}")
+    public @ResponseBody ToDoItemResponse get(@PathVariable("id") String id) {
+        List<String> errors = new ArrayList<>();
+        TodoItem todoItem = null;
+        try {
+            todoItem = itemService.get(id);
+        } catch (final Exception e) {
+            errors.add(e.getMessage());
+        }
+        return ToDoItemAdapter.toToDoItemResponse(todoItem, errors);
+    }
+
+    @GetMapping
+    public @ResponseBody List<ToDoItemResponse> getAll() {
+        List<String> errors = new ArrayList<>();
+        List<TodoItem> todoItems = itemService.findAll();
+        List<ToDoItemResponse> toDoItemResponses = new ArrayList<>();
+        todoItems.stream()
+                .forEach(todoItem -> {
+                    toDoItemResponses.add(ToDoItemAdapter.toToDoItemResponse(todoItem, errors));
+                });
+        return toDoItemResponses;
+    }
 }
