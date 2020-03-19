@@ -57,4 +57,17 @@ public class ToDoItemController {
                 });
         return toDoItemResponses;
     }
+
+    @PutMapping
+    public @ResponseBody ToDoItemResponse update(@RequestBody final ToDoItemRequest toDoItemRequest) {
+        List<String> errors = new ArrayList<>();
+        TodoItem toDoItem = ToDoItemAdapter.toToDoItem(toDoItemRequest);
+        try {
+            toDoItem = itemService.update(toDoItem);
+        } catch (final Exception e) {
+            errors.add(e.getMessage());
+            e.printStackTrace();
+        }
+        return ToDoItemAdapter.toToDoItemResponse(toDoItem, errors);
+    }
 }

@@ -2,7 +2,6 @@ package org.bootvue.qna.todo.model;
 
 import lombok.Builder;
 import org.bootvue.qna.response.ApiResponse;
-import org.bootvue.qna.todo.model.TodoItem;
 
 import java.util.List;
 
