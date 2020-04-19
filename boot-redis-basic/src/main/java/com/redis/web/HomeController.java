@@ -31,5 +31,12 @@ public class HomeController {
         return vehicleRepository.findAll();
     }
 
+    @GetMapping("/driver")
+    public Driver driver(){
+        Driver driver = new Driver(2L, "tester222", "Brian");
+        driverRepository.save(driver);
+
+        return driver;
+    }
 
 }
