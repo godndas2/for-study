@@ -4,8 +4,8 @@ import com.redis.entity.Driver;
 import com.redis.entity.DriverRepository;
 import com.redis.entity.Vehicle;
 import com.redis.entity.VehicleRepository;
+import com.redis.service.CacheableResourceExample;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +15,7 @@ public class HomeController {
 
     private final VehicleRepository vehicleRepository;
     private final DriverRepository driverRepository;
-    private final RedisTemplate redisTemplate;
+    private final CacheableResourceExample cacheableResourceExample;
 
     @GetMapping("/vehicle")
     public Vehicle ret() {
@@ -37,6 +37,13 @@ public class HomeController {
         driverRepository.save(driver);
 
         return driver;
+    }
+
+    @GetMapping("/getFromCache")
+    public void getFromCache(){
+        cacheableResourceExample.getSomeData();
+        cacheableResourceExample.getSomeData();
+        cacheableResourceExample.getSomeData();
     }
 
 }
