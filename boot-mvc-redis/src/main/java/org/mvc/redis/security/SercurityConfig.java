@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SercurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final static String REMEMBER_ME_KEY = "remember-me";
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -19,6 +21,11 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll();
+
+        http
+                .rememberMe()
+                .key(REMEMBER_ME_KEY)
+                .tokenValiditySeconds(6048000);
     }
 
     @Override
