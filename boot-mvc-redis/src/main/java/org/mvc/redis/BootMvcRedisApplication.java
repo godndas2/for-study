@@ -22,7 +22,7 @@ public class BootMvcRedisApplication {
         return args -> {
             userRepository.save(User.builder()
                     .id("testId")
-                    .password("1234")
+                    .password("{bcrypt}$2a$10$rES5T2c7SIT51HpTTs/nS.3Uh2sHoDIz6by9fphfzFgKFmjoYaatC") // 1234
                     .name("testName")
                     .build());
         };

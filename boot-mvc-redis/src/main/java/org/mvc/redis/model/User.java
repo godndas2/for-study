@@ -15,6 +15,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class User implements Serializable {
 
+    private static final long serialVersionUID = 1062898914988042848L;
+
     @Id
     private String id;
     private String password;
