@@ -2,6 +2,9 @@ server:
   port: 8099
 
 spring:
+  redis:
+    host: localhost
+    port: 6379
   profiles:
     active: local
   h2:
