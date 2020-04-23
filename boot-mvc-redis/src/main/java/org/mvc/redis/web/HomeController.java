@@ -20,4 +20,9 @@ public class HomeController {
         model.addAttribute("user", id);
         return "main";
     }
+
+    @GetMapping("error")
+    public String error() {
+        return "error";
+    }
 }

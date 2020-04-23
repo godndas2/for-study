@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
 @Configuration
@@ -37,6 +38,13 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/main", true)
                 .usernameParameter("id")
                 .passwordParameter("password");
+
+        http
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
+                .logoutSuccessUrl("/signin")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
 
         http
                 .rememberMe()
