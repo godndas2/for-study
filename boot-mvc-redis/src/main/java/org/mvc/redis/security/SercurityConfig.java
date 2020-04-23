@@ -1,7 +1,7 @@
 package org.mvc.redis.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mvc.redis.model.TokenRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
@@ -21,6 +23,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SercurityConfig extends WebSecurityConfigurerAdapter {
 
     private final static String REMEMBER_ME_KEY = "remember-me";
+
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,11 +48,12 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
                 .logoutSuccessUrl("/signin")
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                .deleteCookies("JSESSIONID", REMEMBER_ME_KEY);
 
         http
                 .rememberMe()
                 .key(REMEMBER_ME_KEY)
+                .rememberMeServices(persistentTokenBasedRememberMeServices())
                 .tokenValiditySeconds(6048000);
     }
 
@@ -67,6 +72,19 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
         public void init(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         }
+    }
+
+    @Bean
+    public PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices() {
+        PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices =
+                new PersistentTokenBasedRememberMeServices(REMEMBER_ME_KEY, userDetailsService, persistentTokenRepository());
+        return persistentTokenBasedRememberMeServices;
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        TokenRepositoryImpl tokenRepository = new TokenRepositoryImpl();
+        return tokenRepository;
     }
 
     @Override
