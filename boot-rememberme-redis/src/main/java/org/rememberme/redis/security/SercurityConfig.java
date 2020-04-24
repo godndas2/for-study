@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 @RequiredArgsConstructor
 @Configuration
@@ -25,6 +27,7 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
     private final static String REMEMBER_ME_KEY = "remember-me";
 
     private final UserDetailsService userDetailsService;
+    private final FindByIndexNameSessionRepository sessionRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -55,7 +58,15 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
                 .key(REMEMBER_ME_KEY)
                 .rememberMeServices(persistentTokenBasedRememberMeServices())
                 .tokenValiditySeconds(6048000);
+
+        http
+                .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false) // 중복로그인 방지, 기존 사용자 session 을 종료시킨다.
+                .expiredUrl("/alreadyUser") // 중복 로그인 시 보여줄 page
+                .sessionRegistry(sessionRegistry());
     }
+
 
     @Configuration
     @RequiredArgsConstructor
@@ -85,6 +96,11 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
     public PersistentTokenRepository persistentTokenRepository() {
         TokenRepositoryImpl tokenRepository = new TokenRepositoryImpl();
         return tokenRepository;
+    }
+
+    @Bean
+    SpringSessionBackedSessionRegistry sessionRegistry() {
+        return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
     }
 
     @Override
