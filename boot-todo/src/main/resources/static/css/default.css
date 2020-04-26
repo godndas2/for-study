@@ -1,0 +1,104 @@
+body{
+    margin: 1% 10%;
+}
+input{
+    border-style: groove;
+    width: 200px;
+}
+button{
+    border-style: groove;
+}
+.shadow{
+    box-shadow: 3px 7px 7px rgba(0, 0, 0, 0.03);
+}
+h1{
+    text-align: center;
+    font-weight: 900;
+    margin: 2.5rem 0 1.5rem;
+}
+.priority1{
+    color: #FF5733;
+}
+.priority2{
+    color: #FFC300;
+}
+.priority3{
+    color: #2980B9;
+}
+.add-btn{
+    background-color: #6495ED;
+    float: right;
+    color: white;
+    width: 30%;
+}
+#add-btn-div{
+    height: 40px;
+    margin: 3px;
+}
+.todo-div{
+    margin: 2px 0px;
+    border: 2px solid #6495ED;
+    border-radius: 8px;
+    padding: 10px;
+}
+.todo-btn{
+    margin: 5px 10px;
+}
+/* check box */
+.custom-control-label::before,
+.custom-control-label::after {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.todo-header{
+    height: 40px;
+    border-bottom: 1px solid #bdc3c7;
+}
+.todo-header-item{
+    float: left;
+}
+.title{
+    padding-left: 10px;
+    padding-right: 5px;
+}
+.todo-desc{
+    padding: 10px;
+    color: #787878;
+}
+.dead-line-date{
+    top: 0.25rem;
+    font-size: 0.85rem;
+    color: #2C2C2C;
+}
+.todo-display-none{
+    display: none;
+}
+.todo-done-text{
+    text-decoration: line-through;
+    color: #999999;
+}
+
+/* 페이징 처리 */
+#pagination-demo{
+    display: inline-block;
+    margin-bottom: 1.75em;
+}
+#pagination-demo li{
+    display: inline-block;
+}
+
+.page-content{
+    background: #eee;
+    display: inline-block;
+    padding: 10px;
+    width: 100%;
+    max-width: 660px;
+}
+#pagination-btn{
+    margin: 20px auto;
+    width: 200px;
+}
+.time-over{
+    font-size: 0.7rem;
+    color: #FF5733;
+}

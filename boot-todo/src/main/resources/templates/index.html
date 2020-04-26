@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <script src="/webjars/jquery/3.3.1-2/jquery.min.js"></script>
+    <link href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link href="/css/default.css" rel="stylesheet">
+
+    <link href="/css/toastr.min.css" rel="stylesheet">
+    <script src="/js/toastr.min.js"></script>
+
+    <title>spring-todo</title>
+</head>
+<body>
+<div>
+    <h1>TODO list</h1>
+</div>
+
+
+<!-- Button to Open the Modal -->
+<div id="add-btn-div">
+    <button type="button" class="btn add-btn" data-toggle="modal" data-target="#myModal">
+        TODO 추가
+    </button>
+</div>
+<div id="todo-list">
+    <!--todo-->
+    <div class="todo-div todo-display-none" id="todo-div0">
+        <input type="hidden" id="todo-id0">
+        <div class="todo-header">
+            <div class="custom-control form-control-lg custom-checkbox col-sm-7 todo-header-item">
+                <input type="checkbox" class="custom-control-input todo-header-item" id="customCheck0" value= 0 >
+                <label class="custom-control-label todo-header-item" for="customCheck0"><h5 class="title title0"><!--제목--></h5></label>
+                <span class="time-over todo-display-none" id="time-over0">&nbsp;(기한이 지났습니다.)</span>
+            </div>
+            <span class="todo-header-item col-sm-2 dead-line-date created-date0"></span>
+            <span class="todo-header-item col-sm-2 dead-line-date dead-line-date0"></span>
+            <span id="priority0" class="badge badge-pill col-sm-1" style="width: auto;"></span>
+        </div>
+        <div class="todo-desc desc0">
+            <!-- 설명 -->
+        </div>
+        <div class="todo-btn">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateModal" onclick="loadTask(0);">수정</button>
+            <button type="button" class="btn btn-outline-dark" onclick="deleteTodo(0);">삭제</button>
+        </div>
+    </div>
+    <!--todo-->
+    <div class="todo-div todo-display-none" id="todo-div1">
+        <div class="todo-header">
+            <input type="hidden" id="todo-id1">
+            <div class="custom-control form-control-lg custom-checkbox col-sm-7 todo-header-item">
+                <input type="checkbox" class="custom-control-input todo-header-item" id="customCheck1" value= 1>
+                <label class="custom-control-label todo-header-item" for="customCheck1"><h5 class="title title1"><!--제목--></h5></label>
+                <span class="time-over todo-display-none" id="time-over1">&nbsp;(기한이 지났습니다.)</span>
+            </div>
+            <span class="todo-header-item col-sm-2 dead-line-date created-date1"></span>
+            <span class="todo-header-item col-sm-2 dead-line-date dead-line-date1"></span>
+            <span id="priority1" class="badge badge-pill col-sm-1" style="width: auto;"></span>
+        </div>
+        <div class="todo-desc desc1">
+            <!-- 설명 -->
+        </div>
+        <div class="todo-btn">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateModal" onclick="loadTask(1);">수정</button>
+            <button type="button" class="btn btn-outline-dark" onclick="deleteTodo(1);">삭제</button>
+        </div>
+    </div>
+    <!--todo-->
+    <div class="todo-div todo-display-none" id="todo-div2">
+        <div class="todo-header">
+            <input type="hidden" id="todo-id2">
+            <div class="custom-control form-control-lg custom-checkbox col-sm-7 todo-header-item">
+                <input type="checkbox" class="custom-control-input todo-header-item" id="customCheck2" value= 2>
+                <label class="custom-control-label todo-header-item" for="customCheck2"><h5 class="title title2"><!--제목--></h5></label>
+                <span class="time-over todo-display-none" id="time-over2">&nbsp;(기한이 지났습니다.)</span>
+            </div>
+            <span class="todo-header-item col-sm-2 dead-line-date created-date2"></span>
+            <span class="todo-header-item col-sm-2 dead-line-date dead-line-date2"></span>
+            <span id="priority2" class="badge badge-pill col-sm-1" style="width: auto;"></span>
+        </div>
+        <div class="todo-desc desc2">
+            <!-- 설명 -->
+        </div>
+        <div class="todo-btn">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateModal" onclick="loadTask(2);">수정</button>
+            <button type="button" class="btn btn-outline-dark" onclick="deleteTodo(2);">삭제</button>
+        </div>
+    </div>
+    <!--todo-->
+    <div class="todo-div todo-display-none" id="todo-div3">
+        <div class="todo-header">
+            <input type="hidden" id="todo-id3">
+            <div class="custom-control form-control-lg custom-checkbox col-sm-7 todo-header-item">
+                <input type="checkbox" class="custom-control-input todo-header-item" id="customCheck3" value= 3>
+                <label class="custom-control-label todo-header-item" for="customCheck3"><h5 class="title title3"><!--제목--></h5></label>
+                <span class="time-over todo-display-none" id="time-over3">&nbsp;(기한이 지났습니다.)</span>
+            </div>
+            <span class="todo-header-item col-sm-2 dead-line-date created-date3"></span>
+            <span class="todo-header-item col-sm-2 dead-line-date dead-line-date3"></span>
+            <span id="priority3" class="badge badge-pill col-sm-2" style="width: auto;"></span>
+        </div>
+        <div class="todo-desc desc3">
+            <!-- 설명 -->
+        </div>
+        <div class="todo-btn">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateModal" onclick="loadTask(3);">수정</button>
+            <button type="button" class="btn btn-outline-dark" onclick="deleteTodo(3);">삭제</button>
+        </div>
+    </div>
+    <!--todo-->
+    <div class="todo-div todo-display-none shadow" id="todo-div4">
+        <div class="todo-header">
+            <input type="hidden" id="todo-id4">
+            <div class="custom-control form-control-lg custom-checkbox col-sm-7 todo-header-item">
+                <input type="checkbox" class="custom-control-input todo-header-item" id="customCheck4" value= 4>
+                <label class="custom-control-label todo-header-item" for="customCheck4"><h5 class="title title4"><!--제목--></h5></label>
+                <span class="time-over todo-display-none" id="time-over4">&nbsp;(기한이 지났습니다.)</span>
+            </div>
+            <span class="todo-header-item col-sm-2 dead-line-date created-date4"></span>
+            <span class="todo-header-item col-sm-2 dead-line-date dead-line-date4"></span>
+            <span id="priority4" class="badge badge-pill col-sm-2" style="width: auto;"></span>
+        </div>
+        <div class="todo-desc desc4">
+            <!-- 설명 -->
+        </div>
+        <div class="todo-btn">
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateModal" onclick="loadTask(4);">수정</button>
+            <button type="button" class="btn btn-outline-dark" onclick="deleteTodo(4);">삭제</button>
+        </div>
+    </div>
+</div>
+
+<div id="pagination-btn">
+    <!--페이징-->
+    <a href="#" class="previous" onclick="before();">&laquo; Previous</a>
+    <span id="now-page"></span>
+    <span >/</span>
+    <span id="total-page"></span>
+    <a href="#" class="next" onclick="next();">Next &raquo;</a>
+</div>
+<!-- 모달 : TO-DO 추가하기 -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">TODO 추가하기</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="form-title" class="col-form-label">제목 : </label>
+                    <input type="text" class="form-control" id="form-title"  maxlength="40">
+                </div>
+                <div class="form-group">
+                    <label for="form-desc" class="col-form-label">내용 : </label>
+                    <textarea class="form-control" id="form-desc" maxlength="300"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="deadline-date" class="col-form-label">마감기한 : </label>
+                    <input type="date" class="form-control" id="deadline-date">
+                </div>
+                <p>우선 순위 : </p>
+                <div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label priority1">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions"  value="High"> High
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label priority2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions"  value="Medium"> Medium
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label priority3">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" value="Low"> Low
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="submit-todo">추가</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 모달 : TO-DO 수정하기 -->
+<div class="modal" id="updateModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">TODO 수정하기</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="hidden" id="update-todo-id">
+                <div class="form-group">
+                    <label for="form-title" class="col-form-label">제목 : </label>
+                    <input type="text" class="form-control" id="form-title-update"  maxlength="40">
+                </div>
+                <div class="form-group">
+                    <label for="form-desc" class="col-form-label">내용 : </label>
+                    <textarea class="form-control" id="form-desc-update" maxlength="300"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="deadline-date" class="col-form-label">마감기한 : </label>
+                    <input type="date" class="form-control" id="deadline-date-update">
+                </div>
+                <p>우선 순위 : </p>
+                <div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label priority1">
+                            <input class="form-check-input" type="radio" name="priorityRadioUpdate"  value="High"> High
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label priority2">
+                            <input class="form-check-input" type="radio" name="priorityRadioUpdate"  value="Medium"> Medium
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label priority3">
+                            <input class="form-check-input" type="radio" name="priorityRadioUpdate" value="Low"> Low
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="update-todo">수정</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/index.js"></script>
+</body>
+</html>
