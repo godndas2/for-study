@@ -1,5 +1,6 @@
-package com.todo.domain;
+package com.todo.modules.task;
 
+import com.todo.modules.task.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

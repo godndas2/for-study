@@ -1,4 +1,4 @@
-package com.todo.controller.dto;
+package com.todo.modules.task.dto;
 
 import lombok.Getter;
 import lombok.Setter;

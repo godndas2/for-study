@@ -1,11 +1,8 @@
-package com.todo.controller;
+package com.todo.modules.task;
 
-import com.todo.controller.dto.IdDto;
-import com.todo.controller.dto.OverTimeTaskDto;
-import com.todo.controller.dto.TaskDto;
-import com.todo.domain.PriorityType;
-import com.todo.domain.Task;
-import com.todo.service.TaskService;
+import com.todo.modules.task.dto.IdDto;
+import com.todo.modules.task.dto.OverTimeTaskDto;
+import com.todo.modules.task.dto.TaskDto;
 import com.todo.utils.ParseDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

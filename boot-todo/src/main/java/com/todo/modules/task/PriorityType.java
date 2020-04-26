@@ -1,4 +1,4 @@
-package com.todo.domain;
+package com.todo.modules.task;
 
 public enum PriorityType {
 

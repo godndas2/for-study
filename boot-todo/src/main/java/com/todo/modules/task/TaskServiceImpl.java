@@ -1,7 +1,5 @@
-package com.todo.service;
+package com.todo.modules.task;
 
-import com.todo.domain.Task;
-import com.todo.domain.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
