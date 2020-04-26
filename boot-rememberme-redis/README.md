@@ -23,7 +23,7 @@
 > cd target/docker  
 > docker container ls -a (빌드된 컨테이너 확인) 
 ![image](https://user-images.githubusercontent.com/34512538/80284665-cd561a80-875a-11ea-95f6-3d3e2c9efc13.png)  
-> docker run -p 8080:8080 remember .
+> docker run -p 8080:8080 remember .  
 > localhost:8080/signin
 
 
