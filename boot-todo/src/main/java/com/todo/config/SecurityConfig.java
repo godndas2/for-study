@@ -15,8 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers("/",
-                        "/main",
+                .mvcMatchers("/main",
                         "/login")
                 .permitAll()
                 .antMatchers("/api/tasks/").hasRole(Role.ACCOUNT.name()) // ACCOUNT 권한이 있을 경우에만 /api/tasks/** 허용
@@ -26,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/successLogin")
                 .failureUrl("/error")
-                .defaultSuccessUrl("/main", true)
+                .defaultSuccessUrl("/", true)
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll();

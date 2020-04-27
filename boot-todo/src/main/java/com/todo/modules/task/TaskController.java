@@ -9,8 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Task>> getTasks(@RequestParam(name="page", required = false, defaultValue = "1")int page){
+    public ResponseEntity<Page<Task>> getTasks(@RequestParam(name="page", required = false, defaultValue = "1") int page){
         if(page < 1)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         Page<Task> tasks = taskService.getTasks(page - 1);
