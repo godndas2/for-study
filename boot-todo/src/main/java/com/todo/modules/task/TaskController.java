@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 @RequiredArgsConstructor
 @Slf4j
-public class TaskApiController {
+public class TaskController {
 
     private final TaskService taskService;
 
