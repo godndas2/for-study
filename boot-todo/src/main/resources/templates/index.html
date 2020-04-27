@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 <head>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
@@ -16,14 +19,16 @@
 <body>
 <div>
     <h1>TODO List</h1>
-</div>
 
-<div>
-    <a class="todo-btn" href="/logout" role="button" style="text-align: center">Log out</a>
+    <th:block sec:authorize="isAuthenticated()">
+        반갑습니다, <b><span sec:authentication="principal.username"></span></b> 님
+    </th:block>
+    <br>
 </div>
 
 <!-- Button to Open the Modal -->
 <div id="add-btn-div">
+    <a class="btn alert-danger" role="button" style="text-align: center" th:href="@{/logout}">Log out</a>
     <button type="button" class="btn add-btn" data-toggle="modal" data-target="#myModal">
         TODO 추가
     </button>
