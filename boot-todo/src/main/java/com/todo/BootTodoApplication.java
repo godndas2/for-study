@@ -24,6 +24,12 @@ public class BootTodoApplication {
                     .password("{bcrypt}$2a$10$rES5T2c7SIT51HpTTs/nS.3Uh2sHoDIz6by9fphfzFgKFmjoYaatC") // 1234
                     .role(Role.ACCOUNT)
                     .build());
+
+            accountRepository.save(Account.builder()
+                    .email("test2")
+                    .password("{bcrypt}$2a$10$rES5T2c7SIT51HpTTs/nS.3Uh2sHoDIz6by9fphfzFgKFmjoYaatC") // 1234
+                    .role(Role.GUEST)
+                    .build());
         };
     }
 }

@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/main",
                         "/login")
                 .permitAll()
-                .antMatchers("/api/tasks/**").hasRole(Role.ACCOUNT.name()) // ACCOUNT 권한이 있을 경우에만 /api/tasks/** 허용
+                .antMatchers("/api/tasks/").hasRole(Role.ACCOUNT.name()) // ACCOUNT 권한이 있을 경우에만 /api/tasks/** 허용
                 .anyRequest().authenticated();
 
         http.formLogin()
