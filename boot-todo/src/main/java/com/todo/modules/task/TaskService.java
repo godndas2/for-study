@@ -1,6 +1,5 @@
 package com.todo.modules.task;
 
-import com.todo.modules.task.Task;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

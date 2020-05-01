@@ -1,6 +1,7 @@
 package com.todo.modules.task;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.todo.modules.account.Account;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Getter
 @Setter
@@ -43,6 +43,17 @@ public class Task {
 
     @Column
     private boolean timeOver;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+//    public void addAccount(Account account) {
+//        this.account = account;
+//        if (!account.getTaskList().contains(this)) {
+//            account.getTaskList().add(this);
+//        }
+//    }
 
     public Task(){
         createdDate = new Date();
