@@ -36,6 +36,7 @@ public class Account {
     private List<Task> taskList = new ArrayList<>();
 
     public void addTask(Task task) {
+        task.setAccount(this);
         this.taskList.add(task);
     }
 
