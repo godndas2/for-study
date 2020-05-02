@@ -48,13 +48,6 @@ public class Task {
     @JoinColumn(name = "account_id")
     private Account account;
 
-//    public void addAccount(Account account) {
-//        this.account = account;
-//        if (!account.getTaskList().contains(this)) {
-//            account.getTaskList().add(this);
-//        }
-//    }
-
     public Task(){
         createdDate = new Date();
         deadlineDate = new Date();
