@@ -48,6 +48,14 @@ public class Task {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    public void addAccount(Account account) {
+        // 영속성 컨텍스트 Memory 신뢰성을 위해
+        if (this.account != null)
+            this.account.getTaskList().remove(this);
+        this.account = account;
+        account.getTaskList().add(this);
+    }
+
     public Task(){
         createdDate = new Date();
         deadlineDate = new Date();

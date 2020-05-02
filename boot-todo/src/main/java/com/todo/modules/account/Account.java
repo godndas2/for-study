@@ -35,7 +35,9 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Task> taskList = new ArrayList<>();
 
-    // TODO 편의 메소드 필요 Task in account_id
+    public void addTask(Task task) {
+        this.taskList.add(task);
+    }
 
     @Builder
     public Account(String email, String password, Role role) {
