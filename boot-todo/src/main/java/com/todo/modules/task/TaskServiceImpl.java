@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
     @Override
@@ -32,7 +32,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     @Transactional
-    public Task addTask(Task task){
+    public Task addTask(Task task) {
         return taskRepository.save(task);
     }
 

@@ -1,9 +1,8 @@
 package com.todo.modules.task.dto;
 
-import com.todo.modules.account.Account;
+import com.todo.modules.account.dto.AccountDto;
 import com.todo.modules.task.PriorityType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -22,4 +21,6 @@ public class TaskDto {
     private PriorityType priority;
 
     private String deadlineDate;
+
+    private AccountDto accountDto;
 }
