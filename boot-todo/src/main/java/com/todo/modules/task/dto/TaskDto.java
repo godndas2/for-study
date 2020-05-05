@@ -6,8 +6,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Data
 public class TaskDto {
 
     private Long id;
@@ -21,6 +20,8 @@ public class TaskDto {
     private PriorityType priority;
 
     private String deadlineDate;
+
+    private String uploadFiles;
 
     private AccountDto accountDto;
 }

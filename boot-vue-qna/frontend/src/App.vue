@@ -14,12 +14,14 @@
 import sweetalert from 'sweetalert';
 import TodoList from './components/TodoList';
 import CreateTodo from './components/CreateTodo';
+import Hello from './components/Hello';
 
 export default {
   name: 'app',
   components: {
     TodoList,
     CreateTodo,
+    Hello
   },
   data() {
     return {

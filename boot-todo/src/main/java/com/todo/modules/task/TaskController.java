@@ -9,8 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +47,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity addTask(@RequestBody TaskDto taskDto){
+    public ResponseEntity addTask(@RequestBody TaskDto taskDto) {
         Task newTask = mappingTask(taskDto);
         taskService.addTask(newTask);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -52,12 +58,15 @@ public class TaskController {
         task.setId(taskDto.getId());
         task.setTitle(taskDto.getTitle());
         task.setDescription(taskDto.getDescription());
-        if(taskDto.getPriority()==null){
+        task.setUploadFiles(taskDto.getUploadFiles());
+
+        if(taskDto.getPriority() == null){
             task.setPriority(PriorityType.Low);
-        }else{
+        } else {
             task.setPriority(taskDto.getPriority());
         }
         task.setDeadlineDate(ParseDate.stringToDate(taskDto.getDeadlineDate()));
+
         return task;
     }
 

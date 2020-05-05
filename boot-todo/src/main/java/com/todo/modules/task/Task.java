@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -43,6 +44,10 @@ public class Task {
 
     @Column
     private boolean timeOver;
+
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    private String uploadFiles;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")

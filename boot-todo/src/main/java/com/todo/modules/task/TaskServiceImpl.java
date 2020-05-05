@@ -1,6 +1,8 @@
 package com.todo.modules.task;
 
+import com.todo.modules.task.dto.TaskDto;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +15,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
+
     private final TaskRepository taskRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     @Transactional
@@ -33,6 +37,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public Task addTask(Task task) {
+        modelMapper.map(task, TaskDto.class);
         return taskRepository.save(task);
     }
 

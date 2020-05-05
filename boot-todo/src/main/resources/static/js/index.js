@@ -84,9 +84,16 @@ $("#submit-todo").click( function() {
     var desc = $("#form-desc").val();
     var deadlineDate = $("#deadline-date").val();
     var priority = $('input[name="inlineRadioOptions"]:checked').val();
-    console.log('modal  ' + title + '/'+ desc + '/' + deadlineDate +'/' + priority);
-    var JSONObject = { 'title': title, 'description' : desc, 'priority' : priority, 'deadlineDate' : deadlineDate};
+    var uploadFile = $("#upload-image-file").val();
+    console.log('modal  ' + title + '/'+ desc + '/' + deadlineDate +'/' + priority + '/' + uploadFile);
+    var JSONObject = { 'title': title, 'description' : desc, 'priority' : priority, 'deadlineDate' : deadlineDate, 'uploadFile' : uploadFile};
     var jsonData = JSON.stringify(JSONObject);
+
+    if (!title || !desc) {
+        alert("제목 또는 내용이 입력되지 않았습니다");
+        return false;
+    }
+    
     $.ajax({
         url: '/api/tasks',
         method: 'post',
@@ -106,6 +113,7 @@ $("#submit-todo").click( function() {
     $("#form-desc").val('');
     $('input[name="inlineRadioOptions"]').prop("checked" , false);
     $("#deadline-date").val('');
+    $("#uploadFile").val('');
     $('#myModal').modal('toggle');
 } );
 
@@ -185,6 +193,8 @@ function before() {
 function deleteTodo(index) {
     var id = $("#todo-id" + index).val();
     if(id == null) return;
+    if (confirm("정말 삭제하시겠습니까?") === true) {} else {return;}
+
     $.ajax({
         url: '/api/tasks/' + id,
         method: 'delete',
