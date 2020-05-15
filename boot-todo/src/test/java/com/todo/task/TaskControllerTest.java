@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -19,9 +21,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @WebAppConfiguration
@@ -63,6 +66,7 @@ public class TaskControllerTest {
     }
 
     @Test
+    @Description("addTask")
     public void addTaskSuccess() throws Exception {
         Task newTask = tasks.get(0);
         newTask.setId(999L);
@@ -75,6 +79,25 @@ public class TaskControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated());
     }
+
+    @Test
+    @Description("updateTask")
+    public void updateTaskSuccess() throws Exception {
+        given(this.taskService.getTask(1L)).willReturn(tasks.get(0));
+        Task newTask = tasks.get(0);
+        newTask.setTitle("UpdateTitle");
+        newTask.setDescription("UpdateDescription");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String writeValueAsString = objectMapper.writeValueAsString(newTask);
+
+        this.mockMvc.perform(put("/api/tasks/1")
+                .content(writeValueAsString)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 
 
 }

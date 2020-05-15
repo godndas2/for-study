@@ -22,7 +22,7 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    @GetMapping("{/taskId}")
+    @GetMapping(value = "{/taskId}")
     public ResponseEntity<Task> getTask(@PathVariable("taskId") Long taskId){
         Task task = taskService.getTask(taskId);
         if(task == null)
@@ -88,8 +88,9 @@ public class TaskController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/{taskId}")
-    public ResponseEntity updateTask(@RequestBody TaskDto taskDto){
+    @PutMapping(value = "/{taskId}")
+    public ResponseEntity updateTask(@RequestBody TaskDto taskDto,
+                                     @PathVariable("taskId") Long taskId){
         if(taskDto.getId() == 0L) return new ResponseEntity(HttpStatus.BAD_REQUEST);
         Task updateTask = mappingTask(taskDto);
         Task beforeTask = taskService.getTask(taskDto.getId());
