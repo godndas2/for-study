@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -94,6 +93,37 @@ public class TaskControllerTest {
                 .content(writeValueAsString)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    /*
+     * TODO Expected :200 Actual :405
+     */
+    @Test
+    @Description("getTask")
+    public void getTaskSuccess() throws Exception {
+        given(this.taskService.getTask(1L)).willReturn(tasks.get(0));
+        this.mockMvc.perform(get("/api/tasks/1")
+        .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.title").value("TestTitleForTASK"))
+                .andExpect(jsonPath("$.description").value("TEST...."));
+    }
+
+    @Test
+    @Description("RemoveTask")
+    public void deleteTaskSuccess() throws Exception {
+        Task newTask = tasks.get(0);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String writeValueAsString = objectMapper.writeValueAsString(newTask);
+        given(this.taskService.getTask(1L)).willReturn(tasks.get(0));
+        this.mockMvc.perform(delete("/api/tasks/1")
+        .content(writeValueAsString).accept(MediaType.APPLICATION_JSON_VALUE)
+        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
