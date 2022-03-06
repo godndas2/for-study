@@ -36,6 +36,7 @@
 
 > docker-compose up
 
+![nginx](https://user-images.githubusercontent.com/34512538/83167391-2a266580-a14b-11ea-8d78-9ea429a9b364.PNG)
 
 <i>ps. 프로젝트와 동일하게 구성했다면 localhost:8099/ 로 외부접속 가능
 
