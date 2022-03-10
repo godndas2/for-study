@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="75808a6e-6083-4eeb-8d65-60414e1164a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/springboot-oauth2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-oauth2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-oauth2/src/main/java/com/forstudy/oauth2/config/AuthorizationServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-oauth2/src/main/java/com/forstudy/oauth2/config/AuthorizationServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-oauth2/src/main/java/com/forstudy/oauth2/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-oauth2/src/main/java/com/forstudy/oauth2/config/ResourceServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-oauth2/src/main/java/com/forstudy/oauth2/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-oauth2/src/main/java/com/forstudy/oauth2/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-oauth2/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-oauth2/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dsl/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dsl/build.gradle" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +26,7 @@
     <option name="width" value="1938" />
     <option name="height" value="1048" />
   </component>
+  <component name="ProjectId" id="26C6u4EFGyhIGzEI3ugwikVL8ub" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -48,25 +48,26 @@
       <pane id="PackagesPane" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dsl" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -78,7 +79,19 @@
       <option name="presentableId" value="Default" />
       <updated>1580224774063</updated>
       <workItem from="1580224775463" duration="120000" />
+      <workItem from="1646915442964" duration="396000" />
+      <workItem from="1646915860030" duration="148000" />
+      <workItem from="1646916030098" duration="801000" />
+      <workItem from="1646923800258" duration="2107000" />
     </task>
+    <task id="LOCAL-00001" summary="Entity 추가">
+      <created>1646924380171</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1646924380171</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -118,7 +131,11 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Entity 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="Entity 추가" />
   </component>
   <component name="masterDetails">
     <states>
