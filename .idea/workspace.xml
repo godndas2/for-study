@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="75808a6e-6083-4eeb-8d65-60414e1164a9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dsl/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dsl/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dsl/src/test/java/com/example/member/MemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dsl/src/test/java/com/example/member/MemberTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +82,7 @@
       <workItem from="1646915442964" duration="396000" />
       <workItem from="1646915860030" duration="148000" />
       <workItem from="1646916030098" duration="801000" />
-      <workItem from="1646923800258" duration="2107000" />
+      <workItem from="1646923800258" duration="2897000" />
     </task>
     <task id="LOCAL-00001" summary="Entity 추가">
       <created>1646924380171</created>
@@ -91,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646924380171</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Entity Test code">
+      <created>1646927093135</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1646927093135</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -135,7 +142,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Entity 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="Entity 추가" />
+    <MESSAGE value="Entity Test code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Entity Test code" />
   </component>
   <component name="masterDetails">
     <states>
