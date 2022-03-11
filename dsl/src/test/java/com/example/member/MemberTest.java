@@ -1,6 +1,7 @@
 package com.example.member;
 
 import com.example.team.Team;
+import com.querydsl.core.Tuple;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.example.member.QMember.member;
+import static com.example.team.QTeam.team;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
@@ -87,6 +90,46 @@ public class MemberTest {
                 .fetchOne();
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    @DisplayName("집합")
+    public void aggregation() throws Exception {
+        List<Tuple> result = jpaQueryFactory
+                .select(member.count(),
+                        member.age.sum(),
+                        member.age.avg(),
+                        member.age.max(),
+                        member.age.min())
+                .from(member)
+                .fetch();
+
+        Tuple tuple = result.get(0);
+
+        assertThat(tuple.get(member.count())).isEqualTo(4);
+        assertThat(tuple.get(member.age.sum())).isEqualTo(100);
+        assertThat(tuple.get(member.age.avg())).isEqualTo(25);
+        assertThat(tuple.get(member.age.max())).isEqualTo(40);
+        assertThat(tuple.get(member.age.min())).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("group by")
+    public void group() throws Exception {
+        List<Tuple> result = jpaQueryFactory
+                .select(team.name, member.age.avg())
+                .from(member)
+                .join(member.team, team)
+                .groupBy(team.name)
+                .fetch();
+
+        Tuple A = result.get(0);
+        Tuple B = result.get(1);
+
+        assertThat(A.get(team.name)).isEqualTo("teamA");
+        assertThat(A.get(member.age.avg())).isEqualTo(15);
+        assertThat(B.get(team.name)).isEqualTo("teamB");
+        assertThat(B.get(member.age.avg())).isEqualTo(35);
     }
 
 }
