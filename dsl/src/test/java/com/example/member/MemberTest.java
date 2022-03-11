@@ -10,7 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class MemberTest {
 
     @Autowired
     EntityManager em;
+
+    JPAQueryFactory jpaQueryFactory;
 
     @BeforeEach
     public void init() {
@@ -70,4 +73,20 @@ public class MemberTest {
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
     }
+
+    @Test
+    @DisplayName("QueryDsl")
+    public void startQuerydsl() {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        QMember m = new QMember("m");
+
+        Member findMember = queryFactory
+                .select(m)
+                .from(m)
+                .where(m.username.eq("member1"))
+                .fetchOne();
+
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
 }
