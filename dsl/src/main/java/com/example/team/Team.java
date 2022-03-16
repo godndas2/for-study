@@ -1,8 +1,7 @@
 package com.example.team;
 
-import com.example.member.Member;
 import lombok.*;
-
+import com.example.member.Member;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

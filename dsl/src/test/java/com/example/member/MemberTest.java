@@ -2,6 +2,7 @@ package com.example.member;
 
 import com.example.team.Team;
 import com.querydsl.core.Tuple;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,14 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
 import javax.persistence.EntityManager;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
 import static com.example.member.QMember.member;
 import static com.example.team.QTeam.team;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -130,6 +129,37 @@ public class MemberTest {
         assertThat(A.get(member.age.avg())).isEqualTo(15);
         assertThat(B.get(team.name)).isEqualTo("teamB");
         assertThat(B.get(member.age.avg())).isEqualTo(35);
+    }
+
+    @Test
+    @DisplayName("Team A에 소속된 모든 Member")
+    public void join() {
+        List<Member> result = jpaQueryFactory
+                .selectFrom(member)
+                .join(member.team, team) // team = QTeam
+                .where(team.name.eq("teamA"))
+                .fetch();
+
+        assertThat(result)
+                .extracting("username")
+                .containsExactly("member1", "member2");
+    }
+
+    @Test
+    @DisplayName("member의 이름이 team 이름과 같은 member 조회")
+    public void theta_join() {
+        em.persist(new Member("teamA"));
+        em.persist(new Member("teamB"));
+
+        List<Member> result = jpaQueryFactory
+                .select(member)
+                .from(member, team)
+                .where(member.username.eq(team.name))
+                .fetch();
+
+        assertThat(result)
+                .extracting("username")
+                .containsExactly("teamA", "teamB");
     }
 
 }
