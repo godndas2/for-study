@@ -2,6 +2,7 @@ package com.example.member;
 
 import com.example.team.Team;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -304,6 +305,49 @@ public class MemberTest {
 
         for (Tuple tuple : result) {
             System.out.println("tuple=" + tuple);
+        }
+    }
+
+    @Test
+    public void caseWhen() {
+        List<String> result = jpaQueryFactory
+                .select(member.age
+                        .when(10).then("10살")
+                        .when(20).then("20살")
+                        .otherwise("기타"))
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s=" + s);
+        }
+    }
+
+    @Test
+    public void caseWhen2() {
+        List<String> result = jpaQueryFactory
+                .select(new CaseBuilder()
+                        .when(member.age.between(0, 20)).then("0~20살")
+                        .when(member.age.between(21, 30)).then("21~30살")
+                        .otherwise("기타"))
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s=" + s);
+        }
+    }
+
+    @Test
+    public void concat() {
+        List<String> result = jpaQueryFactory
+                .select(member.username.concat("의 나이는 ").concat(member.age.stringValue()))
+                .from(member)
+                .where(member.username.eq("member1"))
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s=" + s);
         }
     }
 
