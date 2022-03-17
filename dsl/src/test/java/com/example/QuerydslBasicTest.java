@@ -2,7 +2,13 @@ package com.example;
 
 import com.example.member.Member;
 import com.example.member.QMember;
+import com.example.member.dto.MemberDto;
+import com.example.member.dto.UserDto;
 import com.example.team.Team;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -121,6 +127,99 @@ public class QuerydslBasicTest {
                 .fetch();
 
         assertThat(results.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void projection() {
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s=" + s);
+        }
+    }
+
+    /**
+     * Tuple은 Repository Layer에서만 사용하는 것을 권장
+     */
+    @Test
+    public void projectionTuple() {
+        List<Tuple> result = queryFactory
+                .select(member.username, member.age)
+                .from(member)
+                .fetch();
+
+        for (Tuple t : result) {
+            String username = t.get(member.username);
+            Integer age = t.get(member.age);
+            System.out.println("username=" + username);
+            System.out.println("age=" + age);
+        }
+    }
+
+    @Test
+    public void findByDtoSetter() {
+        List<MemberDto> result = queryFactory
+                .select(Projections.bean(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto=" +  memberDto);
+        }
+    }
+
+    @Test
+    public void findByDtoField() {
+        List<MemberDto> result = queryFactory
+                .select(Projections.fields(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto=" +  memberDto);
+        }
+    }
+
+    @Test
+    @DisplayName("alias와 subquery")
+    public void findByUserDtoField() {
+        QMember memberSub = new QMember("memberSub");
+
+        List<UserDto> result = queryFactory
+                .select(Projections.fields(UserDto.class,
+                        member.username.as("name"),
+
+                        ExpressionUtils.as(JPAExpressions
+                                .select(memberSub.age.max())
+                                .from(memberSub), "age")
+                ))
+                .from(member)
+                .fetch();
+
+        for (UserDto userDto : result) {
+            System.out.println("userDto=" +  userDto);
+        }
+    }
+
+    @Test
+    public void findByDtoConstructor() {
+        List<MemberDto> result = queryFactory
+                .select(Projections.constructor(MemberDto.class,
+                        member.username,
+                        member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto=" +  memberDto);
+        }
     }
 
 }
