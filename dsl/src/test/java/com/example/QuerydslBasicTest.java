@@ -279,4 +279,38 @@ public class QuerydslBasicTest {
                 .fetch();
     }
 
+    @Test
+//    @Commit
+    public void bulkUpdate() {
+        long count = queryFactory
+                .update(member)
+                .set(member.username, "비회원")
+                .where(member.age.lt(28))
+                .execute();
+
+        // DB와 영속성 컨텍스트 동기화
+        em.flush();
+        em.clear();
+    }
+
+    @Test
+//    @Commit
+    public void bulkAdd() {
+        long count = queryFactory
+                .update(member)
+                .set(member.age, member.age.add(1))
+//                .set(member.age, member.age.add(-1))
+//                .set(member.age, member.age.multiply(2))
+                .execute();
+    }
+
+    @Test
+//    @Commit
+    public void bulkDelete() {
+        long count = queryFactory
+                .delete(member)
+                .where(member.age.lt(18))
+                .execute();
+    }
+
 }
