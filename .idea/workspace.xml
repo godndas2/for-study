@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75808a6e-6083-4eeb-8d65-60414e1164a9" name="Default Changelist" comment="trash">
+    <list default="true" id="75808a6e-6083-4eeb-8d65-60414e1164a9" name="Default Changelist" comment="sqlfunction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dsl/src/test/java/com/example/QuerydslBasicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dsl/src/test/java/com/example/QuerydslBasicTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +90,7 @@
       <workItem from="1647427345160" duration="153000" />
       <workItem from="1647427699892" duration="919000" />
       <workItem from="1647428652122" duration="594000" />
-      <workItem from="1647429697831" duration="4421000" />
+      <workItem from="1647429697831" duration="5314000" />
     </task>
     <task id="LOCAL-00001" summary="Entity 추가">
       <created>1646924380171</created>
@@ -170,7 +169,21 @@
       <option name="project" value="LOCAL" />
       <updated>1647530299521</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="dynamic &amp; bulk">
+      <created>1647531035356</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1647531035356</updated>
+    </task>
+    <task id="LOCAL-00013" summary="sqlfunction">
+      <created>1647531677133</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1647531677133</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -234,7 +247,9 @@
     <MESSAGE value="projection" />
     <MESSAGE value="dynamicQuery" />
     <MESSAGE value="trash" />
-    <option name="LAST_COMMIT_MESSAGE" value="trash" />
+    <MESSAGE value="dynamic &amp; bulk" />
+    <MESSAGE value="sqlfunction" />
+    <option name="LAST_COMMIT_MESSAGE" value="sqlfunction" />
   </component>
   <component name="masterDetails">
     <states>
